@@ -1,12 +1,48 @@
+variable "dev" {
+  description = "dev stage configured"
+  default = {
+    dev = {
+      stage = "dev"
+      stack = var.stack
+      project = var.project
+      az_count = var.az_count_dev
+      vpc_cidr = var.vpc_cidr_dev
+      blue_green = 0
+    }
+  }
+}
+
+variable "prod" {
+  description = "prod stage configured"
+  type = object({
+    stage = string
+    stack = string
+    project = string
+    az_count = string
+    vpc_cidr = string
+    blue_green = string
+  })
+  default = {
+    prod = {
+      stage = "prod"
+      stack = var.stack
+      project = var.project
+      az_count = var.az_count_dev
+      vpc_cidr = var.vpc_cidr_dev
+      blue_green = 1
+    }
+  }
+}
+
 
 variable "stack" {
   description = "Name of the stack."
-  default     = "CloudBootstrap"
+  default = "CloudBootstrap"
 }
 
 variable "project" {
   description = "Name of the project."
-  default     = "cc-cloud-bootstrap"
+  default = "cc-cloud-bootstrap"
 }
 
 variable "aws_region" {
