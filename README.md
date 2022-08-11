@@ -157,3 +157,8 @@ terraform destroy
 ```
 
 The created S3 buckets might fail to delete if not empty. In this case, these need to be deleted manually.
+
+### Known issues and limitations
+
+Due to the fact that variables aren't supported in terraform's `backend` section (there's an open issue on that [here](https://github.com/hashicorp/terraform/issues/13022)), this project will cause a bucket name collision when being deployed more than once.
+You can fix this by supplying an alternative backend state bucket name in `remote-state/main.tf` and adjust `infrastructure/main.tf` to reflect the change. 
